@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="main-div">
+        <div class="title">
+            <h1>WELCOME ADMIN</h1>
+        </div>
+        <div class="sub-title">
+            <h2>You may enter your MCQs here</h2>
+        </div>
+        <div class="inner-div">
+            Enter Question Number<br><input type="text" id="question_no"></input><br><br>
+            Enter the Question here<br><input type="text" id="question"></input><br><br>
+            Enter Option A here<br><input type="text" id="OptionA"></input><br><br>
+            Enter Option B here<br><input type="text" id="OptionB"></input><br><br>
+            Enter Option C here<br><input type="text" id="OptionC"></input><br><br>
+            Enter Option D here<br><input type="text" id="OptionD"></input><br><br>
+            Enter the Correct Answer<br><input type="text" id="answer"></input><br><br>
+            <button id="Add">Add Question</button>
+            <button id="Delete">Delete Question</button><Br>
+            <span><b><u>To delete any question just<br>enter the question number and press delete button.</u></b></span><br><br><br>
+        </div>
+    </div>
+
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+
+
+        const firebaseConfig = {
+    apiKey: "AIzaSyAj2cqV0HeaU6ffr7ccjCD1BRM2kKUOS04",
+    authDomain: "quizapp-b6d94.firebaseapp.com",
+    databaseURL: "https://quizapp-b6d94-default-rtdb.firebaseio.com",
+    projectId: "quizapp-b6d94",
+    storageBucket: "quizapp-b6d94.appspot.com",
+    messagingSenderId: "525148929664",
+    appId: "1:525148929664:web:ff1b2516e0925fed6cf065"
+    };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        import { getFirestore, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, collection } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        
+
+        const db = getFirestore();
+	let question = document.getElementById("question");
+	let question_no = document.getElementById("question_no");
+	let OptionA = document.getElementById("OptionA");
+	let OptionB = document.getElementById("OptionB");
+	let OptionC = document.getElementById("OptionC");
+	let OptionD = document.getElementById("OptionD");
+
+    let addbtn = document.getElementById("Add");
+        var delBtn=document.getElementById("Delete");
+
+
+        async function AddDocument_CustomID() {
+		var ref = doc(db, "thequestionlist", document.getElementById("question_no").value);
+		await setDoc(
+			ref, {
+        Question: document.getElementById("question").value,
+        OptionA: document.getElementById("OptionA").value,
+        OptionB: document.getElementById("OptionB").value,
+        OptionC: document.getElementById("OptionC").value,
+        OptionD: document.getElementById("OptionD").value,
+        Answer:document.getElementById("answer").value
+		}
+		)
+			.then(() => {
+				alert("data added successfully");
+			}
+			)
+			.catch((error) => {
+				alert("unsuccessfull,error:" + error);
+			});
+
+	}
+
+    async function deleteADoc(ref){
+        var ref = doc(db, "thequestionlist", document.getElementById("question_no").value);
+        const docSnap=await getDoc(ref);
+        if(!docSnap.exists()){
+            alert("document not available");
+            return;
+        }
+        await deleteDoc(ref)
+        .then(()=>{
+            alert("data deleted successfully");
+        }).catch((error)=>{
+            alert("unsuccessful op", error);
+        });
+    }
+    
+    addbtn.addEventListener("click", AddDocument_CustomID);
+    delBtn.addEventListener("click", deleteADoc);
+      </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&family=PT+Serif:ital@1&family=Source+Sans+Pro:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&family=PT+Serif:ital@1&family=Pacifico&family=Source+Sans+Pro:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=EB+Garamond:wght@700&family=PT+Serif:ital@1&family=Pacifico&family=Source+Sans+Pro:wght@600&display=swap');
+.main-div{
+    font-family: "EB Garamond", serif;
+    font-family: "PT Serif", serif;
+    font-family: "Source Sans Pro", sans-serif;
+}
+body{
+    background-color: aquamarine;
+}
+.sub-title{
+    margin-top: 2em;
+}
+#question{
+    width: 35rem;
+    height: 5em;
+}
+.inner-div{
+    font-size: 1.3rem;
+}
+#OptionA{
+    width: 24rem;
+    height: 3em;
+}
+#OptionB{
+    width: 24rem;
+    height: 3em;
+}
+#OptionC{
+    width: 24rem;
+    height: 3em;
+}
+#OptionD{
+    width: 24rem;
+    height: 3em;
+}
+#answer{
+    width: 24rem;
+    height: 3em;
+}
+#Add{
+    font-size: 1.3rem;
+    margin: 1em;
+} 
+#Delete{
+    font-size: 1.3rem;
+    margin: 1em;
+}
+#question_no{
+    width: 10rem;
+    height: 3em;
+}

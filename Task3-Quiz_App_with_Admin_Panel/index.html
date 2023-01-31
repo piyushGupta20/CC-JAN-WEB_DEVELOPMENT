@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Quiz-App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+</head>
+<body>
+    <div>
+    <!-- HERO -->
+    <div class="Heros" id="hero">
+        <div class="bg-dark text-secondary px-4 py-4 vh-100 text-center">
+          <div class="py-5">
+            <h1 class="display-5 fw-bold text-white mb-5">
+              PLAY THE ULTIMATE QUIZ
+            </h1>
+            <div class="col-lg-6 mx-auto">
+              <p class="fs-5 mb-4">
+                The android quiz applications test your knowledge and
+                understanding in different areas. After each quiz, the user will
+                see the final score and you have the ability to go through the
+                quiz result analysis to see questions that you fail and the correct answers.
+              </p>
+              <div class="d-grid gap-2 justify-content-sm-center">
+                <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" id="submit">PLAY</button>
+              </div>
+            </div>
+            <div class="p-5">
+              <a href="#" class="link-info">
+                are you an admin?
+              </a>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+      <!-- game html -->
+      <!-- <div>
+          <input type="radio" name="answer" id="ans1" class="answer" />
+          <label for="ans1" id="OptionA_s"></label>
+        </div>
+        <div>
+            <input type="radio" name="answer" id="ans2" class="answer" />
+            <label for="ans1" id="OptionB_s"></label>
+        </div>
+          <div>
+              <input type="radio" name="answer" id="ans3" class="answer" />
+              <label for="ans1" id="OptionC_s"></label>
+            </div>
+            <div>
+                <input type="radio" name="answer" id="ans4" class="answer" />
+                <label for="ans1" id="OptionD_s"></label>
+            </div> -->
+            
+            
+            <div style="display: none" id="box" class="bg-dark text-white text-center vh-100">
+                <div class="box">
+                <h2 class="question text-white d-inline" id="question_no">1</h2><span>.&nbsp;&nbsp;</span>
+                <h3 class="question d-inline" id="question_s"></h3> 
+          
+                <div class="btn-group btn-group-toggle d-flex flex-column gap-2 my-3" data-toggle="buttons">
+                    <div>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="answer" id="ans1" class="answer" />
+                            <span>&nbsp;&nbsp;</span>
+                            <label for="" id="OptionA_s"></label>
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <label class="btn btn-secondary">
+                        <input type="radio" name="answer" id="ans2" class="answer" /> 
+                        <span>&nbsp;&nbsp;</span>
+                        <label for="" id="OptionB_s"></label>
+                    </label>
+                    </div>
+
+                    <div>
+                        <label class="btn btn-secondary">
+                        <input type="radio" name="answer" id="ans3" class="answer"/> 
+                        <span>&nbsp;&nbsp;</span>
+                        <label for="" id="OptionC_s"></label>
+                    </label>
+                    </div>
+                    
+                    <div>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="answer" id="ans4" class="answer"/>
+                            <span>&nbsp;&nbsp;</span>
+                            <label for="" id="OptionD_s"></label>
+                        </label>
+                    </div>
+              
+              </div>
+
+              <div id="showscore" class="scorearea bg-dark"></div>
+              <hr/>
+              
+
+        <!-- <button id="NEXT" class="submitbtn" style="display: none">NEXT</button> -->
+
+        <div class="d-flex justify-content-between">
+            <button id="again" class="btn btn-outline-secondary d-block" style="display: none; padding: 4px;" onclick="location.reload()">RESET</button>
+            <button type="button" id="NEXT" style="display: none" class="btn btn-info d-block">NEXT</button>
+        </div>
+        <button type="button" class="btn btn-outline-info">
+            SCORE:&nbsp;<span class="badge bg-info text-dark" id="showScore"></span>
+          </button>
+
+          
+      <div id="answerNone" style="display: none;"></div>
+      </div> 
+                </div>
+          </div>
+            
+        
+      <!-- <button id="submit" class="submitbtn">START</button> -->
+      
+    </div>
+
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+  
+        const firebaseConfig = {
+          apiKey: "AIzaSyAj2cqV0HeaU6ffr7ccjCD1BRM2kKUOS04",
+          authDomain: "quizapp-b6d94.firebaseapp.com",
+          databaseURL: "https://quizapp-b6d94-default-rtdb.firebaseio.com",
+          projectId: "quizapp-b6d94",
+          storageBucket: "quizapp-b6d94.appspot.com",
+          messagingSenderId: "525148929664",
+          appId: "1:525148929664:web:ff1b2516e0925fed6cf065",
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        import { getFirestore, doc, setDoc, addDoc, updateDoc, deleteDoc, getDoc, collection} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        
+        let hero = document.getElementById("hero")
+        let question_s = document.getElementById("question_s");
+        let question_no_s = document.getElementById("question_no_s");
+        let OptionA_s = document.getElementById("OptionA_s");
+        let OptionB_s = document.getElementById("OptionB_s");
+        let OptionC_s = document.getElementById("OptionC_s");
+        let OptionD_s = document.getElementById("OptionD_s");
+        let answerNone = document.getElementById("answerNone");
+        let box = document.getElementById("box");
+        let NEXT = document.getElementById("NEXT");
+        let again = document.getElementById("again");
+        let Selbtn = document.getElementById("submit");
+  
+  
+        const db = getFirestore();
+        const answers = document.querySelectorAll(".answer");
+        let score = 0;
+        const showScore = document.querySelector("#showScore");
+  
+        const increment = () => {
+          let i = parseInt(document.getElementById("question_no").innerHTML);
+  
+          i = i + 1;
+          document.getElementById("question_no").innerHTML = i;
+        };
+  
+        async function GetADocument() {
+          document.getElementById("submit").innerHTML = "NEXT";
+          var ref = doc(
+            db,
+            "thequestionlist",
+            document.getElementById("question_no").innerHTML
+          );
+          const docSnap = await getDoc(ref);
+  
+          if (docSnap.exists()) {
+            document.getElementById("question_s").innerHTML =
+              docSnap.data().Question;
+            document.getElementById("OptionA_s").innerHTML =
+              docSnap.data().OptionA;
+            document.getElementById("OptionB_s").innerHTML =
+              docSnap.data().OptionB;
+            document.getElementById("OptionC_s").innerHTML =
+              docSnap.data().OptionC;
+            document.getElementById("OptionD_s").innerHTML =
+              docSnap.data().OptionD;
+            document.getElementById("answerNone").innerHTML =
+              docSnap.data().Answer;
+          } else {
+            alert("no such document");
+          }
+        }
+        function answerButton() {
+          let checkanswer = answerNone.innerHTML;
+          console.log(checkanswer);
+  
+          let answer;
+          answers.forEach((curAnsEle) => {
+            if (curAnsEle.checked) {
+              answer = curAnsEle.id;
+            }
+          });
+          if (checkanswer == answer) {
+            console.log("success");
+            score++;
+          } else {
+            console.log("fail");
+          }
+          increment();
+          answers.forEach((curAnsElem) => (curAnsElem.checked = false));
+        //   showScore.innerHTML = `<h3>Your Correct Answers are: ${score}</h3>`;
+          showScore.innerHTML = score;
+        }
+  
+        showScore.classList.remove("scorearea");
+  
+        Selbtn.addEventListener("click", () => {
+          GetADocument();
+          box.style.display = "block";
+          Selbtn.style.display = "none";
+          hero.style.display = "none"
+          NEXT.style.display = "block";
+          again.style.display = "block";
+        });
+  
+        NEXT.addEventListener("click", () => {
+          answerButton();
+          GetADocument();
+        });
+  
+        // Before load 2nd question, call deselectAll()
+      </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
